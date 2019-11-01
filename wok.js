@@ -1,6 +1,7 @@
 const Boxen = require('boxen')
 module.exports = class Wok {
     constructor() {
+        this.name = []
         this.clean = true
         this.ingridients = []
     }
