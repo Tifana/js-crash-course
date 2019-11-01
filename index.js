@@ -16,7 +16,7 @@ wok1.cooking()
 wok1.cooking()
 
 Database.save('wok.json', wok1)
-Database.save('ingridient.json',wok1)
+Database.save('ingridient.json', rice)
 
 const loadedFile = Database.load('wok.json')
 console.log(loadedFile.wok1)
