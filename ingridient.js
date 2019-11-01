@@ -8,6 +8,7 @@ module.exports = class Ingridient {
         }
     }
     addToWok(wok) {
+        this.wok = wok.name
         wok.ingridients.push(this)
     }
 }
