@@ -1,22 +1,39 @@
-const Ingridient = require('./ingridient')
-const Wok = require('./wok')
-const Database = require('./database')
+const Ingridient = require("./models/ingridient");
+const Wok = require("./models/wok");
+const Database = require("./database");
 
-rice = new Ingridient('rice')
-nodles = new Ingridient('nodles')
+// const baseService = require('./base-service');
+const IngridientService = require("./services/Ingridient-service");
+const WokService = require("./service/Wok-service");
 
+// IngridientServ = new IngridientService();
 
-wok1 = new Wok()
+async function main() {
+  const rice = new Ingridient("rice");
+  const nodles = new Ingridient("nodles");
 
-rice.addToWok(wok1)
-nodles.addToWok(wok1)
+  const wok1 = new Wok();
 
-console.log(wok1.ingridients)
-wok1.cooking()
-wok1.cooking()
+  rice.addToWok(wok1);
+  nodles.addToWok(wok1);
+  wok1.report();
 
-Database.save('wok.json', wok1)
-Database.save('ingridient.json', rice)
+  await IngridientService.add(rice);
+  await IngridientService.add(nodles);
 
-const loadedFile = Database.load('wok.json')
-console.log(loadedFile.wok1)
+  const ingd = await IngridientService.findAll();
+
+  console.log(ingd[0].name);
+
+  console.log(wok1.ingridients);
+  wok1.cooking();
+  wok1.cooking();
+
+  Database.save("wok.json", wok1);
+  Database.save("ingridient.json", rice);
+
+  const loadedFile = Database.load("wok.json");
+  // console.log(loadedFile.wok1)
+}
+
+main();
